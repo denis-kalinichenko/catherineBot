@@ -1,0 +1,31 @@
+{
+  "name": "catherinebot",
+  "version": "0.1.0",
+  "description": "Telegram Bot",
+  "main": "Bot.js",
+  "scripts": {
+    "start": "node ./Bot.js",
+    "start:watch": "nodemon ./Bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denis-kalinichenko/catherineBot.git"
+  },
+  "keywords": [
+    "Telegram",
+    "bot"
+  ],
+  "author": "Denis Kalinichenko <d.kalinichenkooo@gmail.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/denis-kalinichenko/catherineBot/issues"
+  },
+  "homepage": "https://github.com/denis-kalinichenko/catherineBot#readme",
+  "dependencies": {
+    "mongoose": "^4.11.5",
+    "node-telegram-bot-api": "^0.27.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
