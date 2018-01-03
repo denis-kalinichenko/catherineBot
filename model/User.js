@@ -1,5 +1,6 @@
 const mongoose = {Schema} = require("./db");
 
+/* database schema for User */
 const userSchema = new Schema({
     chat_id: {
         type: Number,
@@ -23,6 +24,7 @@ const userSchema = new Schema({
     logs: [],
 });
 
+/* registering new user if doesn't exists, updating data and returning full info */
 userSchema.statics.check = function(chat, callback) {
     const query = { chat_id: chat.id },
         update = { username: chat.username },
