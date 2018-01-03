@@ -2,6 +2,6 @@
   "Hi user": "Привет, %s! Для помощи набери команду /help.",
   "Language selected": "Язык установлен.",
   "Choose action": "Выбери действие",
-  "Create new task": "/создать новое задание",
-  "List of tasks": "/список заданий"
+  "Create new task": "/create - создать новое задание",
+  "List of tasks": "/list - список заданий"
 }

@@ -4,6 +4,7 @@ module.exports = (bot, i18n) => {
     const sendLangKeyboard = (msg, reply = "Choose language") => {
         const message_options = {
             parse_mode: "HTML",
+            disable_notification: true,
             reply_markup: {
                 keyboard: [["/lang English 🇺🇸"], ["/lang Русский 🇷🇺"], ["/lang Polski 🇵🇱"]],
             }
@@ -15,6 +16,7 @@ module.exports = (bot, i18n) => {
     const sendActionsKeyboard = (msg) => {
         const message_options = {
             parse_mode: "HTML",
+            disable_notification: true,
             reply_markup: {
                 keyboard: [[i18n.__("Create new task")], [i18n.__("List of tasks")]],
             }

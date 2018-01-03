@@ -10,73 +10,27 @@ i18n.configure({
 const config = require("./config");
 const bot = new TelegramBot(config.token, {polling: true});
 
-const { sendLangKeyboard, sendActionsKeyboard } = require("./src/keyboards")(bot, i18n);
-
-const User = require("./model/User");
+const { sendLangKeyboard, sendActionsKeyboard } = require("./src/utils/keyboards")(bot, i18n);
 
 /* object contains all active users, stored in RAM */
 const userStore = {};
 
-bot.onText(/\/start/, (msg) => {
-    User.check(msg.chat, (error, user) => {
-        if (error) return console.error(error);
+// Greetings
+bot.onText(/\/start/i, require('./src/commands/start')(bot, i18n, userStore));
 
-        userStore[msg.username] = user;
+// Set up commands
+bot.onText(/\/lang+(.+|)/i, require('./src/commands/lang')(bot, i18n, userStore));
+bot.onText(/\/create(?:@\w*)*/i, require('./src/commands/create')(bot, i18n, userStore));
 
-        if (!user.language) {
-            sendLangKeyboard(msg, `Hi, <b>${msg.chat.first_name}</b>. What language do you speak?`);
-            return;
-        }
-
-        i18n.setLocale(user.language);
-
-        let message_body = i18n.__("Hi user", msg.chat.first_name);
-
-        bot.sendMessage(msg.chat.id, message_body);
-    });
-});
-
-bot.onText(/\/lang$/, msg => {
-    return sendLangKeyboard(msg);
-});
-
-bot.onText(/\/lang (.+)/, (msg, match) => {
-    const chatId = msg.chat.id;
-    const body = match[1].toLowerCase();
-    let lang;
-
-    if (body.includes("en")) {
-        lang = "en";
-    }
-
-    if (body.includes("ру")) {
-        lang = "ru";
-    }
-
-    if (body.includes("pol")) {
-        lang = "pl";
-    }
-
-    if (!lang) {
-        return sendLangKeyboard(msg);
-    }
-
-    User.findOneAndUpdate({ chat_id: chatId }, { language: lang }, (error, user) => {
-        if (error) return console.error(error);
-
-        userStore[msg.username] = user;
-
-        i18n.setLocale(lang);
-
-        bot.sendMessage(chatId, i18n.__("Language selected"), {
-            reply_markup: {hide_keyboard: true},
+// todo remove
+bot.on("message", msg => {
+    if (msg.video_note) {
+        const fs = require("fs");
+        bot.downloadFile(msg.video_note.file_id, "./videos").then(filePath => {
+            fs.rename(filePath, filePath + ".mp4", (err) => {
+                if (err) throw err;
+                bot.sendDocument(msg.chat.id, filePath + ".mp4");
+            });
         });
-
-        return sendActionsKeyboard(msg);
-    });
-});
-
-bot.onText(/\/create (.+)/, (msg, match) => {
-    const chatId = msg.chat.id;
-    const body = match[1].toLowerCase();
+    }
 });
