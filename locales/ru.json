@@ -3,5 +3,6 @@
   "Language selected": "Язык установлен.",
   "Choose action": "Выбери действие",
   "Create new task": "/create - создать новое задание",
-  "List of tasks": "/list - список заданий"
+  "List of tasks": "/list - список заданий",
+  "Send task name": "Отправь текст задания"
 }

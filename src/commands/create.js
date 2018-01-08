@@ -1,3 +1,5 @@
+const { CREATE_TASK } = require("./../contants/actions.const");
+
 /**
  * Command to create new Task
  *
@@ -9,7 +11,10 @@
 module.exports = (bot, i18n, userStore = {}) => {
     return (msg, match) => {
         const chatId = msg.chat.id;
-        bot.sendMessage(chatId, "TEST!", {
+
+        userStore[chatId].action = CREATE_TASK;
+
+        bot.sendMessage(chatId, i18n.__("Send task name"), {
             reply_markup: {hide_keyboard: true},
         });
     }
