@@ -1,5 +1,6 @@
 {
-  "Hi user": "Hi, %s! Get help by sending /help command.",
+  "Hi user": "Hi, ${username}! Get help by sending /help command. Change the language by sending /lang.",
+  "Choose your language": "Choose your language",
   "Language selected": "Language selected.",
   "Choose action": "Choose action",
   "Create new task": "/create new task",

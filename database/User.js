@@ -11,17 +11,6 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    language: {
-        type: String,
-    },
-    last_activity: {
-        type: Date,
-        default: Date.now,
-    },
-    last_action_type: {
-        type: String,
-    },
-    logs: [],
 });
 
 class User {

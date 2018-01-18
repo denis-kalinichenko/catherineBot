@@ -1,5 +1,6 @@
 {
-  "Hi user": "Cześć, %s! Aby uzyskać pomocy wyślij komendę /help.",
+  "Hi user": "Cześć, ${username}! Aby uzyskać pomocy wyślij komendę /help. Aby zmienić język wyślij /lang.",
+  "Choose your language": "Wybierz język",
   "Language selected": "Ustawienia językowe zostały zapisane.",
   "Choose action": "Wybierz akcje",
   "Create new task": "/create - dodaj nowe zadanie",

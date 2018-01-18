@@ -34,3 +34,4 @@ typings/
 .env
 
 config/index.json
+database/sessions.json

@@ -4,8 +4,8 @@
   "description": "Telegram Bot",
   "main": "Bot.js",
   "scripts": {
-    "start": "node ./Bot.js",
-    "start:watch": "nodemon ./Bot.js"
+    "start": "node ./Bot.js --harmony-async-await",
+    "start:watch": "nodemon ./Bot.js --ignore database/*.json"
   },
   "repository": {
     "type": "git",
@@ -23,10 +23,13 @@
   "homepage": "https://github.com/denis-kalinichenko/catherineBot#readme",
   "dependencies": {
     "i18n": "^0.8.3",
-    "mongoose": "^5.0.0-rc2",
-    "node-telegram-bot-api": "^0.30.0"
+    "mongoose": "^5.0.0",
+    "node-telegram-bot-api": "^0.30.0",
+    "telegraf": "^3.17.5",
+    "telegraf-i18n": "^6.0.4",
+    "telegraf-session-local": "^0.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.12.5"
+    "nodemon": "^1.14.11"
   }
 }

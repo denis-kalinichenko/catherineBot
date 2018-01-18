@@ -8,7 +8,7 @@
  */
 module.exports = (bot, i18n, userStore = {}) => {
 
-    const User = require("./../../model/User");
+    const User = require("../../database/User");
     const { sendLangKeyboard, sendActionsKeyboard } = require("./../utils/keyboards")(bot, i18n);
 
     return (msg, match) => {

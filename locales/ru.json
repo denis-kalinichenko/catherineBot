@@ -1,5 +1,6 @@
 {
-  "Hi user": "Привет, %s! Для помощи набери команду /help.",
+  "Hi user": "Привет, ${username}! Для помощи набери команду /help. Для изменения языка вышли команду /lang.",
+  "Choose your language": "Выбери язык",
   "Language selected": "Язык установлен.",
   "Choose action": "Выбери действие",
   "Create new task": "/create - создать новое задание",
