@@ -4,7 +4,6 @@ const mongoose = {Schema} = require("./db");
 const taskSchema = new Schema({
     chat_id: {
         type: Number,
-        unique: true,
         required: true,
     },
     name: {

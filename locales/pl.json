@@ -3,7 +3,11 @@
   "Choose your language": "Wybierz język",
   "Language selected": "Ustawienia językowe zostały zapisane.",
   "Choose action": "Wybierz akcje",
-  "Create new task": "/create - dodaj nowe zadanie",
-  "List of tasks": "/list - lista zadań",
-  "Send task name": "Wyślij tytuł zadania"
+  "Create new task": "Dodaj nowe zadanie",
+  "List of tasks": "Lista zadań",
+  "Send task name": "Wyślij tytuł zadania",
+  "Task created": "Zadanie zostało zapisane.",
+  "keyboard": {
+    "cancel": "Anuluj"
+  }
 }

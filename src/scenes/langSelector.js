@@ -4,15 +4,15 @@ const { Markup } = require("telegraf");
 
 const LOCALES = ['🇺🇸 English', '🇷🇺 Русский', '🇵🇱 Polski'];
 
-const langSelector = new Scene('lang');
+const langSelector = new Scene('langSelector');
 
-const keyborard = Markup.keyboard([LOCALES]).oneTime().resize().extra();
+const keyboard = Markup.keyboard([LOCALES]).oneTime().resize().extra();
 
 langSelector.enter((ctx) => {
-    return ctx.reply(ctx.i18n.t("Choose your language"), keyborard);
+    return ctx.reply(ctx.i18n.t("Choose your language"), keyboard);
 });
 
-langSelector.leave((ctx) => ctx.reply(ctx.i18n.t("Language selected")));
+langSelector.leave((ctx) => ctx.reply(ctx.i18n.t("Language selected"), Markup.removeKeyboard().extra()));
 
 langSelector.hears(LOCALES, (ctx) => {
     switch(ctx.match) {
@@ -30,7 +30,7 @@ langSelector.hears(LOCALES, (ctx) => {
 });
 
 langSelector.on('message', (ctx) => {
-    return ctx.reply(ctx.i18n.t("Choose your language"), keyborard);
+    return ctx.reply(ctx.i18n.t("Choose your language"), keyboard);
 });
 
 module.exports = langSelector;

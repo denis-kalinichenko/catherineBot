@@ -3,7 +3,11 @@
   "Choose your language": "Choose your language",
   "Language selected": "Language selected.",
   "Choose action": "Choose action",
-  "Create new task": "/create new task",
-  "List of tasks": "/list of tasks",
-  "Send task name": "Send task name"
+  "Create new task": "Create new task",
+  "List of tasks": "List of tasks",
+  "Send task name": "Send task name",
+  "Task created": "Task created",
+  "keyboard": {
+    "cancel": "Cancel"
+  }
 }

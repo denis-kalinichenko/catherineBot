@@ -3,7 +3,11 @@
   "Choose your language": "Выбери язык",
   "Language selected": "Язык установлен.",
   "Choose action": "Выбери действие",
-  "Create new task": "/create - создать новое задание",
-  "List of tasks": "/list - список заданий",
-  "Send task name": "Отправь текст задания"
+  "Create new task": "Создать новое задание",
+  "List of tasks": "Список заданий",
+  "Send task name": "Отправь текст задания",
+  "Task created": "Задание сохранено.",
+  "keyboard": {
+    "cancel": "Отмена"
+  }
 }
