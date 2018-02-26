@@ -23,13 +23,13 @@
   "homepage": "https://github.com/denis-kalinichenko/catherineBot#readme",
   "dependencies": {
     "i18n": "^0.8.3",
-    "mongoose": "^5.0.0",
+    "mongoose": "^5.0.4",
     "node-telegram-bot-api": "^0.30.0",
-    "telegraf": "^3.17.5",
+    "telegraf": "^3.17.8",
     "telegraf-i18n": "^6.0.4",
     "telegraf-session-local": "^0.0.4"
   },
   "devDependencies": {
-    "nodemon": "^1.14.11"
+    "nodemon": "^1.14.12"
   }
 }

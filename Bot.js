@@ -23,6 +23,7 @@ const stage = new Stage();
 // Scene registration
 stage.register(require("./src/scenes/langSelector"));
 stage.register(require("./src/scenes/taskCreator"));
+stage.register(require("./src/scenes/listViewer"));
 
 bot.use(stage.middleware());
 
@@ -32,5 +33,6 @@ bot.command('help', (ctx) => ctx.reply('help info'));
 
 bot.command("lang", (ctx) => ctx.scene.enter("langSelector"));
 bot.command("create", (ctx) => ctx.scene.enter("taskCreator"));
+bot.command("list", (ctx) => ctx.scene.enter("listViewer"));
 
 bot.startPolling();

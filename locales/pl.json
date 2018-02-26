@@ -7,6 +7,8 @@
   "List of tasks": "Lista zadań",
   "Send task name": "Wyślij tytuł zadania",
   "Task created": "Zadanie zostało zapisane.",
+  "Check list": "Sprawdż listę zadań za pomocą komendy",
+  "No tasks": "Nie masz jeszcze zadań. 🙁 Dodaj nowe",
   "keyboard": {
     "cancel": "Anuluj"
   }

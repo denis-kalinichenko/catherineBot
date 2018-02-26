@@ -7,6 +7,8 @@
   "List of tasks": "List of tasks",
   "Send task name": "Send task name",
   "Task created": "Task created",
+  "Check list": "Check the list of your tasks via command",
+  "No tasks": "You do not have any tasks yet. 🙁 Create new",
   "keyboard": {
     "cancel": "Cancel"
   }
