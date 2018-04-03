@@ -9,14 +9,15 @@ const listViewer = new Scene('listViewer');
 listViewer.enter((ctx) => {
     Task.find({
         chat_id: ctx.from.id,
-    }).limit(5).exec((error, tasks) => {
+    }).sort({done: 1, created: -1}).exec((error, tasks) => {
         if (!tasks.length) {
             ctx.reply(`${ctx.i18n.t("No tasks")}: /create`);
             return;
         }
 
         const reponse = tasks.map(task => {
-            return [Markup.callbackButton(task.name, task._id)];
+            const icon = task.done ? "✅" : "☑️";
+            return [Markup.callbackButton(icon + ' ' + task.name, task._id)];
         });
 
         return ctx.reply(`${ctx.i18n.t('List of your tasks')}:`, Extra.markup(m => m.inlineKeyboard(reponse)));

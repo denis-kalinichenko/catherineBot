@@ -16,6 +16,8 @@
   "Reminder": "Reminder",
   "Created": "Created at",
   "Task removed": "Task removed",
+  "Mark as done": "Mark as done",
+  "Mark as to do": "Mark as to do",
   "keyboard": {
     "cancel": "Cancel",
     "delete": "Delete",

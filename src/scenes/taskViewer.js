@@ -1,5 +1,6 @@
 const Scene = require("telegraf/scenes/base");
 const Extra = require('telegraf/extra');
+const Markup = require('telegraf/markup');
 const moment = require('moment');
 
 const Task = require("../../database/Task");
@@ -18,13 +19,42 @@ taskViewer.enter(ctx => {
             `🔕 <b>${ctx.i18n.t('Reminder')}</b>: not defined \n` +
             `📆 <b>${ctx.i18n.t('Created')}</b> ${moment(task.created).format('LLL')}`;
 
+        const changeStatusButton = !task.done ?
+            Markup.callbackButton(`✅ ${ctx.i18n.t('Mark as done')}`, 'StatusDone') :
+            Markup.callbackButton(`🚫 ${ctx.i18n.t('Mark as to do')}`, 'StatusTODO');
+
         return ctx.editMessageText(response, Extra.HTML().markup(markup =>
             markup.inlineKeyboard([
+                [changeStatusButton],
                 [markup.callbackButton(`🔔 ${ctx.i18n.t('Reminder')}`, 'TaskReminder')],
                 [markup.callbackButton(`✏️ ${ctx.i18n.t('keyboard.edit')}`, 'EditTask')],
                 [markup.callbackButton(`🗑 ${ctx.i18n.t('keyboard.delete')}`, 'DeleteTask')],
             ])));
     });
+});
+
+taskViewer.action('StatusDone', ctx => {
+    return Task.findOneAndUpdate(
+        {_id: ctx.session.activeTaskID},
+        {$set: {done: true}}, error => {
+            if (error) {
+                return console.error(error);
+            }
+
+            return ctx.scene.reenter();
+        });
+});
+
+taskViewer.action('StatusTODO', ctx => {
+    return Task.findOneAndUpdate(
+        {_id: ctx.session.activeTaskID},
+        {$set: {done: false}}, error => {
+            if (error) {
+                return console.error(error);
+            }
+
+            return ctx.scene.reenter();
+        });
 });
 
 taskViewer.action('EditTask', ctx => {

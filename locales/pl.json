@@ -16,6 +16,8 @@
   "Reminder": "Przypomnienie",
   "Created": "Dodano",
   "Task removed": "Zadanie zostało usunięte",
+  "Mark as done": "Oznacz jako wykonane",
+  "Mark as to do": "Oznacz jako do zrobienia",
   "keyboard": {
     "cancel": "Anuluj",
     "delete": "Usuń",

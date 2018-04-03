@@ -12,6 +12,10 @@ const taskSchema = new Schema({
         trim: true,
         stripHtmlTags: true,
     },
+    done: {
+        type: Boolean,
+        default: false,
+    },
     created: {
         type: Date,
         default: Date.now,
