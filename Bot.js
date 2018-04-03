@@ -24,6 +24,9 @@ const stage = new Stage();
 stage.register(require("./src/scenes/langSelector"));
 stage.register(require("./src/scenes/taskCreator"));
 stage.register(require("./src/scenes/listViewer"));
+stage.register(require("./src/scenes/taskViewer"));
+stage.register(require("./src/scenes/taskEditor"));
+stage.register(require("./src/scenes/taskDestroyer"));
 
 bot.use(stage.middleware());
 

@@ -1,4 +1,6 @@
 const Scene = require("telegraf/scenes/base");
+const Extra = require('telegraf/extra');
+const Markup = require('telegraf/markup');
 
 const Task = require("../../database/Task");
 
@@ -13,12 +15,17 @@ listViewer.enter((ctx) => {
             return;
         }
 
-        const reponse = tasks.map((task, index) => {
-            return `<b> ${index + 1}.</b> ${task.name}\n`;
-        }).join("");
+        const reponse = tasks.map(task => {
+            return [Markup.callbackButton(task.name, task._id)];
+        });
 
-        ctx.replyWithHTML(reponse);
+        return ctx.reply(`${ctx.i18n.t('List of your tasks')}:`, Extra.markup(m => m.inlineKeyboard(reponse)));
     });
+});
+
+listViewer.action(/.+/, ctx => {
+    ctx.session.activeTaskID = ctx.match[0];
+    return ctx.scene.enter('taskViewer');
 });
 
 module.exports = listViewer;

@@ -1,6 +1,6 @@
 const Scene = require("telegraf/scenes/base");
 const {match} = require('telegraf-i18n');
-const {Markup, Extra} = require("telegraf");
+const {Markup} = require("telegraf");
 
 const Task = require("../../database/Task");
 
@@ -13,7 +13,7 @@ taskCreator.enter((ctx) => {
 });
 
 taskCreator.hears(match("keyboard.cancel"), (ctx) => {
-    return ctx.scene.leave();
+    return ctx.scene.enter('listViewer');
 });
 
 taskCreator.on("message", (ctx) => {
@@ -27,25 +27,8 @@ taskCreator.on("message", (ctx) => {
             return console.error(error);
         }
 
-        ctx.reply(`${ctx.i18n.t("Task created")}`).then(() => ctx.scene.leave());
+        ctx.reply(`${ctx.i18n.t("Task created")}`, Markup.removeKeyboard().extra()).then(() => ctx.scene.enter('listViewer'));
     });
 });
 
-taskCreator.leave((ctx) => ctx.reply(ctx.i18n.t("Check list") + " /list", Markup.removeKeyboard().extra()));
-
 module.exports = taskCreator;
-
-
-/*
-Markup.removeKeyboard().extra()).then(() => {
-    return ctx.replyWithHTML(`✅ Task\n` +
-        `\n<b>${ctx.message.text}</b> `,
-        Extra.markup((markup) => {
-            return markup.inlineKeyboard([
-                [markup.callbackButton('🔔 Reminder', 'TaskReminder')],
-                [markup.callbackButton('✏️ Edit', 'EditTask')],
-                [markup.callbackButton('🗑 Delete', 'DeleteTask')],
-            ]).resize();
-
-        }));
-}*/

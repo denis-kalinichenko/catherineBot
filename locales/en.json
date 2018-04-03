@@ -5,11 +5,24 @@
   "Choose action": "Choose action",
   "Create new task": "Create new task",
   "List of tasks": "List of tasks",
+  "List of your tasks": "List of your tasks",
   "Send task name": "Send task name",
+  "Send new task name": "Send new task name",
   "Task created": "Task created",
+  "Task saved": "Task saved",
   "Check list": "Check the list of your tasks via command",
   "No tasks": "You do not have any tasks yet. 🙁 Create new",
+  "Task": "Task",
+  "Reminder": "Reminder",
+  "Created": "Created",
+  "Task removed": "Task removed",
   "keyboard": {
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "alerts": {
+    "Something went wrong": "Something went wrong",
+    "Are you sure?": "Are you sure?"
   }
 }

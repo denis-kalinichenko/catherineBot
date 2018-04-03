@@ -5,11 +5,24 @@
   "Choose action": "Wybierz akcje",
   "Create new task": "Dodaj nowe zadanie",
   "List of tasks": "Lista zadań",
+  "List of your tasks": "Lista Twoich zadań",
   "Send task name": "Wyślij tytuł zadania",
+  "Send new task name": "Wyślij nowy tytuł zadania",
   "Task created": "Zadanie zostało zapisane.",
+  "Task saved": "Zadanie zostało zmienione.",
   "Check list": "Sprawdż listę zadań za pomocą komendy",
   "No tasks": "Nie masz jeszcze zadań. 🙁 Dodaj nowe",
+  "Task": "Zadanie",
+  "Reminder": "Przypomnienie",
+  "Created": "Dodano",
+  "Task removed": "Zadanie zostało usunięte",
   "keyboard": {
-    "cancel": "Anuluj"
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "edit": "Edytuj"
+  },
+  "alerts": {
+    "Something went wrong": "Coś poszło nie tak",
+    "Are you sure?": "Napewno chcesz to zrobić?"
   }
 }
