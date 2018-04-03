@@ -1,5 +1,6 @@
 const Scene = require("telegraf/scenes/base");
 const Extra = require('telegraf/extra');
+const moment = require('moment');
 
 const Task = require("../../database/Task");
 
@@ -11,9 +12,11 @@ taskViewer.enter(ctx => {
             return ctx.answerCbQuery(`${ctx.i18n.t('alerts.Something went wrong')}... ${error}`);
         }
 
-        const response = `<b>${ctx.i18n.t('Task')}</b>: ${task.name}\n` +
-            `<b>${ctx.i18n.t('Reminder')}</b>: not defined \n` +
-            `<b>${ctx.i18n.t('Created')}</b>: ${task.created}`;
+        moment.locale(ctx.i18n.locale());
+
+        const response = `📝 <b>${ctx.i18n.t('Task')}</b>: ${task.name}\n` +
+            `🔕 <b>${ctx.i18n.t('Reminder')}</b>: not defined \n` +
+            `📆 <b>${ctx.i18n.t('Created')}</b> ${moment(task.created).format('LLL')}`;
 
         return ctx.editMessageText(response, Extra.HTML().markup(markup =>
             markup.inlineKeyboard([
@@ -30,6 +33,10 @@ taskViewer.action('EditTask', ctx => {
 
 taskViewer.action('DeleteTask', ctx => {
     return ctx.scene.enter('taskDestroyer');
+});
+
+taskViewer.action('TaskReminder', ctx => {
+    return ctx.scene.enter('reminderSetter');
 });
 
 module.exports = taskViewer;

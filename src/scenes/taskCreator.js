@@ -22,7 +22,7 @@ taskCreator.on("message", (ctx) => {
         name: ctx.message.text,
     });
 
-    return task.save((error, createdTask) => {
+    return task.save(error => {
         if (error) {
             return console.error(error);
         }

@@ -27,6 +27,7 @@ stage.register(require("./src/scenes/listViewer"));
 stage.register(require("./src/scenes/taskViewer"));
 stage.register(require("./src/scenes/taskEditor"));
 stage.register(require("./src/scenes/taskDestroyer"));
+stage.register(require("./src/scenes/reminderSetter"));
 
 bot.use(stage.middleware());
 
