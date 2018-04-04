@@ -34,9 +34,7 @@ taskViewer.enter(ctx => {
 });
 
 taskViewer.action('StatusDone', ctx => {
-    return Task.findOneAndUpdate(
-        {_id: ctx.session.activeTaskID},
-        {$set: {done: true}}, error => {
+    return Task.setDone(ctx.session.activeTaskID, error => {
             if (error) {
                 return console.error(error);
             }
@@ -46,9 +44,7 @@ taskViewer.action('StatusDone', ctx => {
 });
 
 taskViewer.action('StatusTODO', ctx => {
-    return Task.findOneAndUpdate(
-        {_id: ctx.session.activeTaskID},
-        {$set: {done: false}}, error => {
+    return Task.setTodo(ctx.session.activeTaskID, error => {
             if (error) {
                 return console.error(error);
             }
