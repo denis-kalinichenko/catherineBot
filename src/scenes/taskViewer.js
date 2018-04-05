@@ -16,7 +16,7 @@ taskViewer.enter(ctx => {
         moment.locale(ctx.i18n.locale());
 
         const response = `📝 <b>${ctx.i18n.t('Task')}</b>: ${task.name}\n` +
-            `🔕 <b>${ctx.i18n.t('Reminder')}</b>: not defined \n` +
+            `🔕 <b>${ctx.i18n.t('Reminder')}</b>: ${ctx.i18n.t('No reminder')} \n` +
             `📆 <b>${ctx.i18n.t('Created')}</b> ${moment(task.created).format('LLL')}`;
 
         const changeStatusButton = !task.done ?
