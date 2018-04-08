@@ -30,34 +30,49 @@ class Task {
      * Set status to done
      *
      * @param id - Task ID
-     * @param callback
      */
-    static setDone(id, callback) {
-        const query = { _id: id };
+    static setDone(id) {
         const update = { done: true };
         const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-        this.findOneAndUpdate(query, update, options, (error, task) => {
-            if (error) return callback(error);
-            callback(null, task);
-        });
+        return this.findByIdAndUpdate(id, update, options).exec();
     }
 
     /**
-     * Set status to TODO
+     * Set status to TO DO
      *
      * @param id - Task ID
-     * @param callback
      */
-    static setTodo(id, callback) {
-        const query = { _id: id };
+    static setTodo(id) {
         const update = { done: false };
         const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 
-        this.findOneAndUpdate(query, update, options, (error, task) => {
-            if (error) return callback(error);
-            callback(null, task);
-        });
+        return this.findByIdAndUpdate(id, update, options).exec();
+    }
+
+    /**
+     * Set reminder
+     *
+     * @param id - Task ID
+     * @param date - Date
+     */
+    static setReminder(id, date) {
+        const update = { reminder: date };
+        const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+        return this.findByIdAndUpdate(id, update, options).exec();
+    }
+
+    /**
+     * Unset reminder
+     *
+     * @param id - Task ID
+     */
+    static unsetReminder(id) {
+        const update = { reminder: null };
+        const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+        return this.findByIdAndUpdate(id, update, options).exec();
     }
 }
 

@@ -7,62 +7,55 @@ const Task = require("../../database/Task");
 
 const taskViewer = new Scene('taskViewer');
 
-taskViewer.enter(ctx => {
-    return Task.findById(ctx.session.activeTaskID).exec((error, task) => {
-        if (error) {
-            return ctx.answerCbQuery(`${ctx.i18n.t('alerts.Something went wrong')}... ${error}`);
-        }
+taskViewer.enter(async ctx => {
+    const task = await Task.findById(ctx.session.activeTaskID).exec();
 
-        moment.locale(ctx.i18n.locale());
+    if (!task) {
+        return ctx.reply(`${ctx.i18n.t('alerts.Something went wrong')}... `);
+    }
 
-        const response = `📝 <b>${ctx.i18n.t('Task')}</b>: ${task.name}\n` +
-            `🔕 <b>${ctx.i18n.t('Reminder')}</b>: ${ctx.i18n.t('No reminder')} \n` +
-            `📆 <b>${ctx.i18n.t('Created')}</b> ${moment(task.created).format('LLL')}`;
+    moment.locale(ctx.i18n.locale());
 
-        const changeStatusButton = !task.done ?
-            Markup.callbackButton(`✅ ${ctx.i18n.t('Mark as done')}`, 'StatusDone') :
-            Markup.callbackButton(`🚫 ${ctx.i18n.t('Mark as to do')}`, 'StatusTODO');
+    const reminderInfo = task.reminder ? moment(task.reminder).format("LLL") : ctx.i18n.t('No reminder');
+    const reminderIcon = task.reminder ? "🔔" : "🔕";
 
-        return ctx.editMessageText(response, Extra.HTML().markup(markup =>
-            markup.inlineKeyboard([
-                [changeStatusButton],
-                [markup.callbackButton(`🔔 ${ctx.i18n.t('Reminder')}`, 'TaskReminder')],
-                [markup.callbackButton(`✏️ ${ctx.i18n.t('keyboard.edit')}`, 'EditTask')],
-                [markup.callbackButton(`🗑 ${ctx.i18n.t('keyboard.delete')}`, 'DeleteTask')],
-            ])));
-    });
+    const response = `📝 ${task.name}\n` +
+        reminderIcon + ` <b>${ctx.i18n.t('Reminder')}</b> ${reminderInfo} \n` +
+        `📆 <b>${ctx.i18n.t('Created')}</b> ${moment(task.created).format('LLL')}`;
+
+    const changeStatusButton = !task.done ?
+        Markup.callbackButton(`✅ ${ctx.i18n.t('Mark as done')}`, 'StatusDone') :
+        Markup.callbackButton(`🚫 ${ctx.i18n.t('Mark as to do')}`, 'StatusTODO');
+
+    return ctx.reply(response, Extra.HTML().markup(markup =>
+        markup.inlineKeyboard([
+            [changeStatusButton],
+            [markup.callbackButton(`🔔 ${ctx.i18n.t('Reminder')}`, 'remindTask-' + task._id)],
+            [markup.callbackButton(`✏️ ${ctx.i18n.t('keyboard.edit')}`, 'editTask-' + task._id)],
+            [markup.callbackButton(`🗑 ${ctx.i18n.t('keyboard.delete')}`, 'deleteTask-' + task._id)],
+        ])));
 });
 
-taskViewer.action('StatusDone', ctx => {
-    return Task.setDone(ctx.session.activeTaskID, error => {
-            if (error) {
-                return console.error(error);
-            }
+taskViewer.action('StatusDone', async ctx => {
+    try {
+        await Task.setDone(ctx.session.activeTaskID);
+    } catch (e) {
+        console.error(e);
+    }
 
-            return ctx.scene.reenter();
-        });
+    await ctx.answerCbQuery('Marked as Done');
+    return ctx.scene.reenter();
 });
 
-taskViewer.action('StatusTODO', ctx => {
-    return Task.setTodo(ctx.session.activeTaskID, error => {
-            if (error) {
-                return console.error(error);
-            }
+taskViewer.action('StatusTODO', async ctx => {
+    try {
+        await Task.setTodo(ctx.session.activeTaskID);
+    } catch (e) {
+        console.error(e);
+    }
 
-            return ctx.scene.reenter();
-        });
-});
-
-taskViewer.action('EditTask', ctx => {
-    return ctx.scene.enter('taskEditor');
-});
-
-taskViewer.action('DeleteTask', ctx => {
-    return ctx.scene.enter('taskDestroyer');
-});
-
-taskViewer.action('TaskReminder', ctx => {
-    return ctx.scene.enter('reminderSetter');
+    await ctx.answerCbQuery('Marked as TO DO');
+    return ctx.scene.reenter();
 });
 
 module.exports = taskViewer;

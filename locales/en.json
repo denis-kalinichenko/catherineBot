@@ -19,6 +19,9 @@
   "Mark as done": "Mark as done",
   "Mark as to do": "Mark as to do",
   "No reminder": "no reminder yet",
+  "Send me date and time": "Send me date and/or time. E.g.",
+  "Incorrect date/time format": "Incorrect date time format. Please, try again",
+  "Reminder set success": "OK, I'll remind you ${task} at ${date}",
   "keyboard": {
     "cancel": "Cancel",
     "delete": "Delete",

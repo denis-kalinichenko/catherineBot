@@ -12,18 +12,14 @@ taskDestroyer.enter(ctx => {
     ]).oneTime().resize().extra());
 });
 
-taskDestroyer.hears(match("keyboard.cancel"), (ctx) => {
-    return ctx.scene.enter('listViewer');
+taskDestroyer.hears(match("keyboard.cancel"), ctx => {
+    return ctx.scene.enter('taskViewer');
 });
 
-taskDestroyer.hears(match("keyboard.delete"), (ctx) => {
-    return Task.findByIdAndRemove(ctx.session.activeTaskID, error => {
-        if (error) {
-            return ctx.reply(ctx.i18n.t('alerts.Something went wrong'));
-        }
-
-        return ctx.reply(ctx.i18n.t('Task removed')).then(() => ctx.scene.enter('listViewer'));
-    });
+taskDestroyer.hears(match("keyboard.delete"), async ctx => {
+    await Task.findByIdAndRemove(ctx.session.activeTaskID).exec();
+    await ctx.reply(ctx.i18n.t('Task removed'));
+    return ctx.scene.enter('listViewer');
 });
 
 module.exports = taskDestroyer;

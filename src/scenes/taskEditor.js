@@ -12,21 +12,15 @@ taskEditor.enter((ctx) => {
     ]).oneTime().resize().extra());
 });
 
-taskEditor.hears(match("keyboard.cancel"), (ctx) => {
+taskEditor.hears(match("keyboard.cancel"), ctx => {
     return ctx.scene.enter('listViewer');
 });
 
-taskEditor.on("message", (ctx) => {
-    return Task.findOneAndUpdate(
-        {_id: ctx.session.activeTaskID},
-        {$set: {name: ctx.message.text}},
-        {new: true}, error => {
-            if (error) {
-                return console.error(error);
-            }
+taskEditor.on("message", async ctx => {
+    await Task.findByIdAndUpdate(ctx.session.activeTaskID, {$set: {name: ctx.message.text}}, {new: true}).exec();
 
-            return ctx.reply(`${ctx.i18n.t("Task saved")}`, Markup.removeKeyboard().extra()).then(() => ctx.scene.enter('listViewer'));
-        });
+    await ctx.reply(`${ctx.i18n.t("Task saved")}`, Markup.removeKeyboard().extra());
+    return ctx.scene.enter('taskViewer');
 });
 
 module.exports = taskEditor;

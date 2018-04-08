@@ -43,5 +43,11 @@ bot.command("lang", (ctx) => ctx.scene.enter("langSelector"));
 bot.command("create", (ctx) => ctx.scene.enter("taskCreator"));
 bot.command("list", (ctx) => ctx.scene.enter("listViewer"));
 
+/* Actions registration */
+bot.action(/openTask-+(.+|)/, require("./src/actions/openTask"));
+bot.action(/deleteTask-+(.+|)/, require("./src/actions/deleteTask"));
+bot.action(/editTask-+(.+|)/, require("./src/actions/editTask"));
+bot.action(/remindTask-+(.+|)/, require("./src/actions/remindTask"));
+
 /* Starting bot */
 bot.startPolling();

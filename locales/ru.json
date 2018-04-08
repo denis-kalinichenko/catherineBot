@@ -19,6 +19,9 @@
   "Mark as done": "Пометить как выполненное",
   "Mark as to do": "Пометить как невыполненное",
   "No reminder": "нет",
+  "Send me date and time": "Вышли дату и/или время. Например,",
+  "Incorrect date/time format": "Неправильная дата/время. Попробуй ещё раз",
+  "Reminder set success": "OK, я напомню ${task} ${date}",
   "keyboard": {
     "cancel": "Отмена",
     "delete": "Удалить",

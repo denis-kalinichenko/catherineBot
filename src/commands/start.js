@@ -6,14 +6,16 @@ const User = require("../../database/User");
  * @param ctx - bot context
  * @returns {function(*, *)}
  */
-module.exports = ctx => {
-    User.check({ chat_id: ctx.from.id, username: ctx.from.username }, (error, user) => {
-        if (error) return console.error(error);
+module.exports = async ctx => {
+    try {
+        await User.check({ chat_id: ctx.from.id, username: ctx.from.username });
 
         const message = ctx.i18n.t('Hi user', {
             username: ctx.from.username,
         });
 
         return ctx.reply(message);
-    });
+    } catch (e) {
+        console.error(e);
+    }
 };

@@ -19,6 +19,9 @@
   "Mark as done": "Oznacz jako wykonane",
   "Mark as to do": "Oznacz jako do zrobienia",
   "No reminder": "brak",
+  "Send me date and time": "Wyślij dzień i/lub godzinę. Np.",
+  "Incorrect date/time format": "Nieprawidłowy format daty/godziny. Proszę spróbuj ponownie",
+  "Reminder set success": "OK, przypomnę Ci ${task} ${date}",
   "keyboard": {
     "cancel": "Anuluj",
     "delete": "Usuń",
